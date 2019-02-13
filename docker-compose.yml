@@ -1,0 +1,34 @@
+version: '3'
+services:
+  webpack:
+    image: "node:10.15.0"
+    build:
+      context: .
+      dockerfile: Dockerfile.webpack
+    tty: true
+    command: bash -c "ls && npm run build"
+
+    volumes:
+      - .:/transporter
+    ports:
+      - "8080:8080"
+  db:
+    image: postgres
+#  redis:
+#    image: "redis:3.2.12"
+#    ports:
+#      - '6379:6379'
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    tty: true
+    environment:
+      - public_ip=192.168.178.43
+    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/transporter
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db

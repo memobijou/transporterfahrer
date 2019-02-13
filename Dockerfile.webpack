@@ -1,0 +1,14 @@
+# Use an official Python runtime as a parent image
+FROM node:10.15.0
+
+# Set the working directory to /transporter/frontend
+WORKDIR /transporter/frontend
+
+# Copy the current directory contents into the container at /transporter/frontend
+
+COPY frontend/. /transporter/frontend
+RUN npm install
+
+# Make port 80 available to the world outside this container
+EXPOSE 80
+CMD ["npm", "run", "build"]
