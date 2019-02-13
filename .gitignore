@@ -117,3 +117,6 @@ dmypy.json
 
 # pycharm
 .idea/
+
+# Node.js
+node_modules/
