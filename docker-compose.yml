@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile.webpack
     tty: true
-    command: bash -c "npm i && npm run build"
+    command: bash -c "npm run build"
 
     volumes:
       - .:/transporter
